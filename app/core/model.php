@@ -10,14 +10,14 @@ class model {
     static function db(){
         $options = [
             //required
-            'username' => 'root',
-            'database' => 'portfolio',
+            'username' => USERNAME,
+            'database' => DATABASE,
             //optional
             'password' => '',
-            'type' => 'mysql',
+            'type' => DATABASE_TYPE,
             'charset' => 'utf8',
-            'host' => 'localhost',
-            'port' => '3306'
+            'host' => SERVER,
+            'port' => PORT
         ];
         $db = new Database($options);
 

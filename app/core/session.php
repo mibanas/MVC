@@ -16,7 +16,7 @@ class session {
         return $_SESSION[$key];
     }
 
-    public static function Destroy() {
+    public static function Stop() {
         @session_destroy();
     }
 }

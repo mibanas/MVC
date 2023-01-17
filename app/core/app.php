@@ -28,7 +28,6 @@ class app{
 
     private function render() {
         $controller = "MVC\controllers\\".$this->controller;
-        //echo $controller . "<br>";
         if(class_exists($controller)) {
             if (method_exists($controller, $this->method)) {
                 $controller = new $controller;

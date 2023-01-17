@@ -24,4 +24,10 @@ class usercontrollers extends controller{
         echo "usercontroller";
     }
 
+    public function register() {
+        $this->view("\home\\register",[]);
+    }
+
+
+
 }

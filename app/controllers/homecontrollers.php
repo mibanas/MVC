@@ -6,6 +6,8 @@ use MVC\core\controller;
 use MVC\models\user;
 use Rakit\Validation\Validator;
 use MVC\core\session;
+use MVC\core\helpers;
+
 
 class homecontrollers extends controller{
 
@@ -31,6 +33,7 @@ class homecontrollers extends controller{
         $this->view("\home\login",[]);
     }
 
+
     public function postlogin(){
         // echo "<pre>";
         // print_r($_POST);
@@ -53,8 +56,11 @@ class homecontrollers extends controller{
             $user = new user();
             $data_user = $user->GetUser($_POST['username'],$_POST['password']);
             session::Set('user_session',$data_user);
-            header('LOCATION: user/index');
+            helpers::redirect("user/index");
         }
 
+    }
+    public function logout() {
+        session::Stop();
     }
 }

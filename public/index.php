@@ -8,6 +8,15 @@ define("CORE", APP.DS."core");
 define("MODELS", APP.DS."models");
 define("VIEWS", APP.DS."views");
 
+// CONFIG
+define("SERVER", "localhost");
+define("USERNAME", "root");
+define("PASSWORD", "");
+define("DATABASE", "portfolio");
+define("DATABASE_TYPE", "mysql");
+define("PORT", 3306);
+define("DOMAINE_NAME", "http://mvc.sanabi.com/");
+
 
 require_once("../vendor/autoload.php");
 
