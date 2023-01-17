@@ -2,10 +2,7 @@
 
 namespace MVC\core;
 
-
-
-class app {
-
+class app{
     private $controller;
     private $method;
     private $params;
@@ -16,33 +13,31 @@ class app {
     }
 
     private function url() {
-        if(!empty($_SERVER['QUERY_STRING'])) {
-            $tab_url = explode("/", $_SERVER['QUERY_STRING']);
-            // print_r($tab_url);
-            $this->controller = (!empty($tab_url[0])) ? $tab_url[0]."controllers" : "homecontrollers" ;
-            $this->method = (!empty($tab_url[1])) ? $tab_url[1] : "index";
-            unset($tab_url[0], $tab_url[1]);
-            $this->params = array_values($tab_url);
-            // print_r($this->params);
+        if (!empty($_SERVER['QUERY_STRING'])) {
+            $url = explode("/",$_SERVER['QUERY_STRING']);
+            $this->controller = (!empty($url[0])) ? $url[0]."controllers" : "homecontrollers";
+            $this->method = (!empty($url[1])) ? $url[1] : "index";
+            unset($url[0],$url[1]);
+            $this->params = array_values($url);
         } else {
-            echo "query not exist";
+            $this->controller = "homecontrollers";
+            $this->method = "index";
+            $this->params = [];
         }
     }
 
     private function render() {
-        $class_search = "MVC\controllers\\".$this->controller;
-        if (class_exists($class_search)) {
-
-            $class_search = new $class_search;
-
-            if (method_exists($class_search,$this->method)) {
-                call_user_func_array(array($class_search,$this->method),$this->params);
-            } else {
-                echo "method not exist";
-            }  
-        } else {
-            echo "class not exist";
+        $controller = "MVC\controllers\\".$this->controller;
+        //echo $controller . "<br>";
+        if(class_exists($controller)) {
+            if (method_exists($controller, $this->method)) {
+                $controller = new $controller;
+                call_user_func_array([$controller, $this->method], $this->params);
+            }else {
+                echo 'method not exist';
+            }
+        }else {
+            echo 'class not exist';
         }
     }
 }
-
